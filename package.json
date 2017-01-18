@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src --presets babel-preset-es2015 --out-dir lib",
-    "test": "mocha \"src/**/*.spec.js\" --compilers js:babel-core/register"
+    "test": "mocha \"src/**/*.spec.js\" --compilers js:babel-core/register",
+    "cover": "istanbul cover _mocha \"src/**/*.spec.js\" -- --require babel-register"
   },
   "keywords": [
     "fetch",
@@ -22,6 +23,7 @@
     "eslint": "3.13.1",
     "eslint-config-airbnb": "14.0.0",
     "eslint-plugin-import": "2.2.0",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "3.2.0",
     "sinon": "1.17.7",
     "sinon-chai": "2.8.0"
