@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ptitFicus/YAFA.svg?branch=master)](https://travis-ci.org/ptitFicus/YAFA)
+
 # YAFA
 YAFA (Yet Another Fetch alternative) is a super simple library that allow to "wrapp" fetch request and responses.
 
