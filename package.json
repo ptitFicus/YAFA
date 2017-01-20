@@ -2,7 +2,7 @@
   "name": "yafa",
   "version": "1.0.0",
   "description": "Library that allows creation of simple wrappers for fetch.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src --presets babel-preset-es2015 --out-dir lib",
     "test": "mocha \"src/**/*.spec.js\" --compilers js:babel-core/register",
