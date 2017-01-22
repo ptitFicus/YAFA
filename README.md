@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/ptitFicus/YAFA.svg?branch=master)](https://travis-ci.org/ptitFicus/YAFA)
 [![Coverage Status](https://coveralls.io/repos/github/ptitFicus/YAFA/badge.svg?branch=master)](https://coveralls.io/github/ptitFicus/YAFA?branch=master)
 # YAFA
-YAFA (Yet Another Fetch alternative) is a super simple library that allow to "wrapp" fetch request and responses.
+YAFA (Yet Another Fetch alternative) is a super simple library that allow to "wrap" fetch requests and responses.
 
 ## Request wrappers
 ```js
