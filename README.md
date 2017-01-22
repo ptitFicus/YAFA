@@ -44,7 +44,7 @@ const responseWrapper = response => response.replace.split('e').join('a')
 
 const newFetch = fetch.wrapResponse(responseWrapper)
 
-// Every occurence of 'e' has been replace
+// Every occurrence of 'e' has been replace
 // by a 'a' in the response
 newFetch().then(response => console.log(response))
 ```
@@ -60,7 +60,7 @@ const responseWrapper2 = response => response.replace.split('a').join('i')
 const newFetch = fetch.wrapResponse(responseWrapper)
                       .wrapResponse(responseWrapper2)
 
-// Every occurence of 'e' and 'a' has been replace
+// Every occurrence of 'e' and 'a' has been replace
 // by a 'i' in the response
 newFetch().then(response => console.log(response))
 ```
