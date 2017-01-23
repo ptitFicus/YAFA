@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/ptitFicus/YAFA.svg?branch=master)](https://travis-ci.org/ptitFicus/YAFA)
 [![Coverage Status](https://coveralls.io/repos/github/ptitFicus/YAFA/badge.svg?branch=master)](https://coveralls.io/github/ptitFicus/YAFA?branch=master)
+[![npm version](https://badge.fury.io/js/yafa.svg)](https://badge.fury.io/js/yafa)
 # YAFA
 YAFA (Yet Another Fetch alternative) is a super simple library that allow to "wrap" fetch requests and responses.
 
