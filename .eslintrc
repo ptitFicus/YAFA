@@ -1,10 +1,10 @@
 {
+  "extends": [
+    "airbnb-base"
+  ],
   "env": {
     "mocha": true
   },
-  "extends": [
-    "airbnb/base"
-  ],
   "globals": {
     "fetch": true
   },
@@ -13,6 +13,7 @@
     "arrow-parens": "off",
     "comma-dangle": "off",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "no-return-assign": "off",
     "semi": "off"
   }
 }
