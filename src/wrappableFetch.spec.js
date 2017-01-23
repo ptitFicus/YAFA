@@ -15,17 +15,19 @@ beforeEach(() => {
 })
 
 describe('Internal mechanism', () => {
-  it('Should call vanilla fetch', () => {
+  it('Should call vanilla fetch', done => {
     const callUrl = 'aaa'
     fetch(callUrl)
-
-    expect(global.fetch).to.have.been.calledWith(callUrl)
+    .then(() => {
+      expect(global.fetch).to.have.been.calledWith(callUrl)
+      done()
+    })
   })
 })
 
 
 describe('Request wrapper', () => {
-  it('Single wrapper argument modifications are applied ', () => {
+  it('Single wrapper argument modifications are applied ', done => {
     const wAText = 'wrappedByA'
     const callUrl = 'fake-url'
 
@@ -35,10 +37,13 @@ describe('Request wrapper', () => {
 
     const newFetch = fetch.wrapRequest(wrapperA)
     newFetch(callUrl)
-    expect(global.fetch).to.have.been.calledWith(`${callUrl}${wAText}`)
+    .then(() => {
+      expect(global.fetch).to.have.been.calledWith(`${callUrl}${wAText}`)
+      done()
+    })
   })
 
-  it('Multiple Wrapper argument modifications are applied in the correct order', () => {
+  it('Multiple Wrapper argument modifications are applied in the correct order', done => {
     const wAText = 'wrappedByA'
     const wBText = 'wrappedByB'
     const calledUrl = 'fake-url'
@@ -53,18 +58,46 @@ describe('Request wrapper', () => {
     const newFetch = fetch.wrapRequest(wrapperA)
                           .wrapRequest(wrapperB)
     newFetch(calledUrl)
-
-    expect(global.fetch).to.have.been.calledWith(`${calledUrl}${wAText}${wBText}`)
+    .then(() => {
+      expect(global.fetch).to.have.been.calledWith(`${calledUrl}${wAText}${wBText}`)
+      done()
+    })
   })
 
-  it('A throw in a wrapper should be propagate', () => {
+  it('A throw in a wrapper should be propagate', done => {
+    const errMsg = 'Fake error'
     const wrapper = () => {
-      throw new Error('Fake error')
+      throw new Error(errMsg)
     }
 
     const newFetch = fetch.wrapRequest(wrapper)
 
-    expect(() => { newFetch('url') }).to.throw()
+    newFetch()
+    .catch((err) => {
+      expect(err.message).to.equals(errMsg)
+      done()
+    })
+  })
+
+  it('Wrapper are applied in the correct order', done => {
+    const wAText = 'wrappedByA'
+    const wBText = 'wrappedByB'
+    const calledUrl = 'fake-url'
+
+    const wrapperA = (delegate, url, ...rest) => {
+      setTimeout(() => delegate(url + wAText, ...rest), 100)
+    }
+    const wrapperB = (delegate, url, ...rest) => {
+      delegate(url + wBText, ...rest)
+    }
+
+    const newFetch = fetch.wrapRequest(wrapperA)
+                          .wrapRequest(wrapperB)
+    newFetch(calledUrl)
+      .then(() => {
+        expect(global.fetch).to.have.been.calledWith(`${calledUrl}${wAText}${wBText}`)
+        done()
+      })
   })
 })
 

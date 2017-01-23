@@ -6,16 +6,24 @@ const buildResponse = (fetchPromise, wrappers) => {
   })
 }
 
-const executeWrappedRequest = (requestArguments, wrappers) => {
-  let localArguments = requestArguments
-
-  wrappers.forEach(wrapper => {
-    wrapper(
-      (...args) => { localArguments = [...args] },
-      ...localArguments
-    )
+const promisifyWrapper = (wrapper, args) => {
+  return new Promise(resolve => {
+    wrapper((...modifiedArguments) => resolve(modifiedArguments), ...args)
   })
-  return fetch(...localArguments)
+}
+
+const executeWrappedRequest = (requestArguments, wrappers) => {
+  let promise = Promise.resolve(requestArguments)
+
+  wrappers.forEach(
+    wrapper => promise = promise.then(currentArguments => {
+      return promisifyWrapper(wrapper, currentArguments)
+    })
+  )
+
+  return promise.then(modifiedArguments => {
+    return fetch(...modifiedArguments)
+  })
 }
 
 const fetchFatcory = (requestWrappers, responseWrappers) => {

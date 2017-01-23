@@ -7,7 +7,8 @@
     "build": "babel src --presets babel-preset-es2015 --out-dir lib",
     "test": "mocha \"src/**/*.spec.js\" --compilers js:babel-core/register",
     "cover": "istanbul cover -x \"src/**/*.spec.js\"  _mocha \"src/**/*.spec.js\" -- --require babel-register",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "lint": "eslint src/**"
   },
   "keywords": [
     "fetch",
@@ -22,8 +23,8 @@
     "babel-preset-es2015": "6.18.0",
     "chai": "3.5.0",
     "coveralls": "2.11.15",
-    "eslint": "3.13.1",
-    "eslint-config-airbnb": "14.0.0",
+    "eslint": "3.14.0",
+    "eslint-config-airbnb-base": "11.0.1",
     "eslint-plugin-import": "2.2.0",
     "istanbul": "1.1.0-alpha.1",
     "mocha": "3.2.0",
