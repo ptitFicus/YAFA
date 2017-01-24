@@ -6,6 +6,7 @@ const buildResponse = (fetchPromise, wrappers) => {
   })
 }
 
+
 const promisifyWrapper = (wrapper, args) => {
   return new Promise(resolve => {
     wrapper((...modifiedArguments) => resolve(modifiedArguments), ...args)
@@ -20,10 +21,7 @@ const executeWrappedRequest = (requestArguments, wrappers) => {
       return promisifyWrapper(wrapper, currentArguments)
     })
   )
-
-  return promise.then(modifiedArguments => {
-    return fetch(...modifiedArguments)
-  })
+  return promise.then(modifiedArguments => fetch(...modifiedArguments))
 }
 
 const fetchFatcory = (requestWrappers, responseWrappers) => {
