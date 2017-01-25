@@ -1,6 +1,6 @@
 {
   "name": "yafa",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library that allows creation of simple wrappers for fetch.",
   "main": "lib/index.js",
   "scripts": {
