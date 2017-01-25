@@ -1,4 +1,5 @@
-const buildResponse = (fetchPromise, wrappers) => wrappers.reduce((currentPromise, wrapper) => currentPromise.then(wrapper), fetchPromise)
+const buildResponse = (fetchPromise, wrappers) => wrappers
+  .reduce((currentPromise, wrapper) => currentPromise.then(wrapper), fetchPromise)
 
 const promisifyWrapper = (wrapper, args) => {
   return new Promise(resolve => {
