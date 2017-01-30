@@ -22,7 +22,7 @@ describe('JWT token wrapper', () => {
 
     newFetch(url)
     .then(() => {
-      expect(global.fetch).to.have.been.calledWith(url, { 'x-access-token': token })
+      expect(global.fetch).to.have.been.calledWith(url, { headers: { Authorization: `Bearer ${token}` } })
       done()
     })
   })

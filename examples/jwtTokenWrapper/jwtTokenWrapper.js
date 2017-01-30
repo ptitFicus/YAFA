@@ -1,5 +1,11 @@
 const jwtTokenWrapper = token => (delegate, url, config = {}) => {
-  const modifiedConfig = { ...config, 'x-access-token': token }
+  const headers = config.headers || {}
+
+  const modifiedConfig = {
+    ...config,
+    headers: { ...headers, Authorization: `Bearer ${token}` }
+  }
+
   delegate(url, modifiedConfig)
 }
 
