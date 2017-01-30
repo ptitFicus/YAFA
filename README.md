@@ -66,3 +66,44 @@ const newFetch = fetch.wrapResponse(responseWrapper)
 // by a 'i' in the response
 newFetch().then(response => console.log(response))
 ```
+
+## Real world examples
+
+### JWT token request wrapper
+
+Common practice when using JWT is to store token in localStorage/sessionStorage.
+Below is an example of request wrapper that retrieve token in local storage and join it to any future request.
+
+```js
+const jwtTokenWrapper = (delegate, url, config = {}) => {
+  const headers = config.headers || {}
+  const token = sessionStorage.getItem('token')
+
+  const modifiedConfig = {
+    ...config,
+    headers: { ...headers, Authorization: `Bearer ${token}` }
+  }
+
+  delegate(url, modifiedConfig)
+}
+
+const newFetch = fetch.wrapRequest(jwtTokenWrapper)
+
+newtFetch('http://some-url-with-jwt-auth')
+```
+
+### JSON response parser
+
+When retrieving a response from a REST call, it is often needed to convert response to JSON.
+This response wrapper allow you to factorize that code.
+
+```js
+const jsonResponseWrapper = response => response.json()
+
+const newFetch = fetch.wrapResponse(jsonResponseWrapper)
+
+newFetch('http://some-url-that-return-json')
+  .then(response => {
+    // Process JSON data
+  })
+```
